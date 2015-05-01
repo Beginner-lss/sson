@@ -1,0 +1,23 @@
+{
+  "name": "sson",
+  "version": "1.0.0",
+  "description": "SSON parses semantic stylesheet markdown comments into JSON",
+  "author": "jay@nopr.co",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nopr/sson.git"
+  },
+  "keywords": [
+    "css",
+    "parse",
+    "markdown",
+    "json"
+  ],
+  "bugs": {
+    "url": "https://github.com/nopr/sson/issues"
+  },
+  "homepage": "https://github.com/nopr/sson"
+}
