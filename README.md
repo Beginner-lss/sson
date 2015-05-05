@@ -1,6 +1,6 @@
 # sson
 
-> `sson` is a node module for parsing stylesheet markdown comments into semantic JSON
+> **sson** is a node module for parsing stylesheet markdown comments into semantic JSON
 
 ## Install
 
@@ -8,16 +8,26 @@ Install with `npm install sson --save`.
 
 ## Getting started
 
-Call `sson` with a content buffer from CSS, SCSS, LESS (or similar file formats) and it will return a JSON object containing `sections`, one for each block comment in the source file.
+Call **sson** with a content buffer from CSS, SCSS, LESS (or similar file formats) and it will return a JSON object containing `sections`, one for each block comment in the source file.
 
 Comments will be parsed as [Markdown](https://github.com/chjj/marked) and any recognised  code blocks will be rendered as HTML/CSS source-result pairs, with added syntax [highlighting](https://github.com/isagalaev/highlight.js).
 
-### Example source file
+### Example usage
 
+```js
+var sson = require('sson')
+var data = fs.readFileSync('foo.css')
+
+sson(data)
 ```
+
+### Example source
+
+```css
 /*
 
-# Foo
+Foo
+===
 
 Renders paragraphs as bold text.
 
@@ -30,25 +40,16 @@ p {
 }
 ```
 
-### Example usage
-
-```js
-var sson = require('sson')
-var data = fs.readFileSync('foo.css')
-
-sson(data)
-```
-
 ### Example output
 
 ```json
 {
   "sections": [
     {
-      "comment": "<h1 id="foo">Foo</h1>\n<p>Renders paragraphs as bold text.</p>\n",
+      "comment": "<h1 id=\"foo\">Foo</h1>\n<p>Renders paragraphs as bold text.</p>\n",
       "result": "\n<p>Hello World</p>\n",
-      "markup": "<pre class="hljs"><code><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Hello World<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></code></pre>",
-      "style": "<pre class="hljs"><code><span class="hljs-tag">p</span> {\n  <span class="hljs-attribute">font-weight</span><span class="hljs-value">: bold;</span>\n}</code></pre>"
+      "markup": "<pre class=\"hljs\"><code><span class=\"hljs-tag\">&lt;<span class=\"hljs-title\">p</span>&gt;</span>Hello World<span class=\"hljs-tag\">&lt;/<span class=\"hljs-title\">p</span>&gt;</span></code></pre>",
+      "style": "<pre class=\"hljs\"><code><span class=\"hljs-tag\">p</span> {\n  <span class=\"hljs-attribute\">font-weight</span><span class=\"hljs-value\">: bold;</span>\n}</code></pre>"
     }
   ]
 }
