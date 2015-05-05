@@ -1,7 +1,7 @@
 {
   "name": "sson",
   "version": "1.0.0",
-  "description": "SSON parses semantic stylesheet markdown comments into JSON",
+  "description": "Parses stylesheet markdown comments into semantic JSON",
   "author": "jay@nopr.co",
   "main": "index.js",
   "license": "MIT",
@@ -12,16 +12,20 @@
   },
   "keywords": [
     "css",
+    "scss",
+    "sass",
+    "less",
+    "json",
     "parse",
     "markdown",
-    "json"
+    "sassdown"
   ],
   "bugs": {
     "url": "https://github.com/nopr/sson/issues"
   },
   "homepage": "https://github.com/nopr/sson",
   "dependencies": {
-    "highlight.js": "^8.5.0",
-    "marked": "^0.3.3"
+    "highlight.js": "8.5.0",
+    "marked": "0.3.3"
   }
 }
