@@ -19,5 +19,9 @@
   "bugs": {
     "url": "https://github.com/nopr/sson/issues"
   },
-  "homepage": "https://github.com/nopr/sson"
+  "homepage": "https://github.com/nopr/sson",
+  "dependencies": {
+    "highlight.js": "^8.5.0",
+    "marked": "^0.3.3"
+  }
 }
