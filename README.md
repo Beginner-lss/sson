@@ -46,9 +46,8 @@ p {
 {
   "sections": [
     {
-      "comment": "<h1 id=\"foo\">Foo</h1>\n<p>Renders paragraphs as bold text.</p>\n",
+      "comment": "<h1 id=\"foo\">Foo</h1>\n<p>Renders paragraphs as bold text.</p>\n<pre class=\"hljs\"><code><span class=\"hljs-tag\">&lt;<span class=\"hljs-title\">p</span>&gt;</span>Hello World<span class=\"hljs-tag\">&lt;/<span class=\"hljs-title\">p</span>&gt;</span></code></pre>",
       "result": "\n<p>Hello World</p>\n",
-      "markup": "<pre class=\"hljs\"><code><span class=\"hljs-tag\">&lt;<span class=\"hljs-title\">p</span>&gt;</span>Hello World<span class=\"hljs-tag\">&lt;/<span class=\"hljs-title\">p</span>&gt;</span></code></pre>",
       "style": "<pre class=\"hljs\"><code><span class=\"hljs-tag\">p</span> {\n  <span class=\"hljs-attribute\">font-weight</span><span class=\"hljs-value\">: bold;</span>\n}</code></pre>"
     }
   ]
