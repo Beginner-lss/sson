@@ -1,6 +1,6 @@
 {
   "name": "sson",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Parses stylesheet markdown comments into semantic JSON",
   "author": "jay@nopr.co",
   "main": "index.js",
