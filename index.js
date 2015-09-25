@@ -18,7 +18,9 @@ module.exports = function (buffer) {
     return formatting(comment)
   })
   // Return as JSON sections list
-  return { 'sections': sections }
+  return {
+    'sections': sections
+  }
 }
 
 // Return one or more regular expression matches
@@ -59,16 +61,49 @@ function formatting(comment) {
   // If the comment contains any code braces
   if (content.match(/```/)) {
     // Break down the content into blocks by type
-    output.comment = markdown(content.split(/```/)[0])
-    output.result  = content.split(/```/)[1]
-    output.markup  = '<pre class="hljs"><code>'+highlight.highlight('html', content.split(/```/)[1].split(/```/)[0].trim()).value+'</code></pre>'
+    output.comment = markdown(content)
+    var pre = new RegExp(/(?:```)([\s\S]*?)(?:```)/g)
+    var examples = pre.exec(content)
+    // Create results content
+    output.result = ''
+    // Loop
+    while (examples != null) {
+      var parsed = markdown('```'+examples[1]+'```')
+      var highlighted = '<pre class="hljs"><code>'+highlight.highlight('html', examples[1].trim()).value+'</code></pre>'
+      output.comment = output.comment.replace(parsed, highlighted)
+      output.result += examples[1]
+      // Run the regular expression again
+      examples = pre.exec(content)
+    }
     // Render styles only if they were present
     if (unspace(styling).length > 0) {
-      output.style  = '<pre class="hljs"><code>'+highlight.highlight('scss', styling.trim()).value+'</code></pre>'
+      output.styles  = '<pre class="hljs"><code>'+highlight.highlight('scss', styling.trim()).value+'</code></pre>'
     }
   } else {
     // No code example, so just the comment
     output.comment = markdown(content)
+  }
+  // Determine whether file contains @import statements
+  if (styling.match(/@import/)) {
+    // Find any relevant matches
+    var matches = new RegExp(/@import\s(?:'|")(.+)(?:'|");/g)
+    var imports = matches.exec(styling)
+    // Create array for partial imports
+    output.imports = {}
+    // Loop through each import
+    while (imports != null) {
+      // Get path and filename from string
+      var item = imports[1].split('/')
+      if (item.length) {
+        var filename = item[item.length-1]
+        var filepath = imports[1].replace('/'+filename, '')
+        // Add to imports array
+        output.imports[filepath] = output.imports[filepath] || []
+        output.imports[filepath].push(filename)
+        // // Run the regular expression again
+        imports = matches.exec(styling)
+      }
+    }
   }
   // Return
   return output
